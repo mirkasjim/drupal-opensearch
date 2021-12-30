@@ -28,15 +28,6 @@ jobs:
         lando version
         node -v
         yarn -v
-    - name: get user ids
-      run: |
-        ls -al .
-        whoami
-        id
-        id -u
-        id -g
-        getent group $(id -g)
-        groups
     - name: Update codebase to follow CI configuration
       run: |
         sed -i -e "/###/d" docker-compose.yml
@@ -64,4 +55,4 @@ jobs:
     # - name: Show Lando logs
     #   continue-on-error: true
     #   run: |
-    #     docker-compose -p drupal9base logs
+    #     docker-compose -p drupal9elastic logs

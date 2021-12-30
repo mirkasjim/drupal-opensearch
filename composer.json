@@ -1,5 +1,5 @@
 {
-    "name": "lagoon-examples/drupal9-base",
+    "name": "lagoon-examples/drupal9-elastic",
     "description": "Project template for Drupal 9 projects with MariaDB, hosted on Lagoon",
     "type": "project",
     "license": "GPL-2.0-or-later",
@@ -22,7 +22,9 @@
         "cweagans/composer-patches": "1.7.1",
         "drupal/core-project-message": "9.3.0",
         "drupal/core-recommended": "9.3.0",
+        "drupal/elasticsearch_connector": "7.0-alpha3",
         "drupal/lagoon_logs": "2.0.0-beta1",
+        "drupal/search_api": "1.20.0",
         "drush/drush": "10.6.2",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
     },

@@ -1,5 +1,5 @@
-Lando Drupal 9 base - php8, nginx, mariadb
-==========================================
+Lando Drupal 9 Elastic - php8, nginx, mariadb, elasticsearch
+============================================================
 
 This example exists primarily to test the following documentation:
 
@@ -32,18 +32,19 @@ lando drush cr -y
 lando drush status | grep "Drupal bootstrap" | grep "Successful"
 
 # Should have all the services we expect
-docker ps --filter label=com.docker.compose.project=drupal9base | grep Up | grep drupal9base_nginx_1
-docker ps --filter label=com.docker.compose.project=drupal9base | grep Up | grep drupal9base_mariadb_1
-docker ps --filter label=com.docker.compose.project=drupal9base | grep Up | grep drupal9base_mailhog_1
-docker ps --filter label=com.docker.compose.project=drupal9base | grep Up | grep drupal9base_php_1
-docker ps --filter label=com.docker.compose.project=drupal9base | grep Up | grep drupal9base_cli_1
-docker ps --filter label=com.docker.compose.project=drupal9base | grep Up | grep drupal9base_lagooncli_1
+docker ps --filter label=com.docker.compose.project=drupal9elastic | grep Up | grep drupal9elastic_nginx_1
+docker ps --filter label=com.docker.compose.project=drupal9elastic | grep Up | grep drupal9elastic_mariadb_1
+docker ps --filter label=com.docker.compose.project=drupal9elastic | grep Up | grep drupal9elastic_mailhog_1
+docker ps --filter label=com.docker.compose.project=drupal9elastic | grep Up | grep drupal9elastic_php_1
+docker ps --filter label=com.docker.compose.project=drupal9elastic | grep Up | grep drupal9elastic_cli_1
+docker ps --filter label=com.docker.compose.project=drupal9elastic | grep Up | grep drupal9elastic_lagooncli_1
+docker ps --filter label=com.docker.compose.project=drupal9elastic | grep Up | grep drupal9elastic_elasticsearch_1
 
 # Should ssh against the cli container by default
 lando ssh -c "env | grep LAGOON=" | grep cli-drupal
 
 # Should have the correct environment set
-lando ssh -c "env" | grep LAGOON_ROUTE | grep drupal9-base.lndo.site
+lando ssh -c "env" | grep LAGOON_ROUTE | grep drupal9-elastic.lndo.site
 lando ssh -c "env" | grep LAGOON_ENVIRONMENT_TYPE | grep development
 
 # Should be running PHP 8
@@ -72,6 +73,12 @@ lando lagoon --version | grep lagoon
 
 # Should have a running Drupal 9 site served by nginx on port 8080
 lando ssh -s cli -c "curl -kL http://nginx:8080" | grep "Welcome to Drush Site-Install"
+
+# Should have Elasticsearch running
+lando ssh -s cli -c "curl -kL http://elasticsearch:9200" | grep "docker-cluster"
+
+# Should have Elasticsearch cluster healthy
+lando ssh -s cli -c "curl -kL http://elasticsearch:9200/_cluster/health" | grep "green"
 
 # Should be able to db-export and db-import the database
 lando db-export test.sql
