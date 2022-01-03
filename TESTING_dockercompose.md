@@ -1,4 +1,4 @@
-Docker Compose Drupal 9 Elastic - php8, nginx, mariadb, elasticsearch
+Docker Compose Drupal 9 Opensearch - php8, nginx, mariadb, opensearch
 =====================================================================
 
 This is a docker-compose version of the Lando example tests:
@@ -18,7 +18,7 @@ docker-compose down
 docker-compose build && docker-compose up -d
 
 # Ensure mariadb pod is ready to connect
-docker run --rm --net drupal9-elastic_default amazeeio/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
+docker run --rm --net drupal9-opensearch_default amazeeio/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
 ```
 
 Verification commands
@@ -33,17 +33,17 @@ docker-compose exec -T cli bash -c "drush cr -y"
 docker-compose exec -T cli bash -c "drush status" | grep "Drupal bootstrap" | grep "Successful"
 
 # Should have all the services we expect
-docker ps --filter label=com.docker.compose.project=drupal9-elastic | grep Up | grep drupal9-elastic_nginx_1
-docker ps --filter label=com.docker.compose.project=drupal9-elastic | grep Up | grep drupal9-elastic_mariadb_1
-docker ps --filter label=com.docker.compose.project=drupal9-elastic | grep Up | grep drupal9-elastic_php_1
-docker ps --filter label=com.docker.compose.project=drupal9-elastic | grep Up | grep drupal9-elastic_cli_1
-docker ps --filter label=com.docker.compose.project=drupal9-elastic | grep Up | grep drupal9-elastic_elasticsearch_1
+docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_nginx_1
+docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_mariadb_1
+docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_php_1
+docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_cli_1
+docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_opensearch_1
 
 # Should ssh against the cli container by default
 docker-compose exec -T cli bash -c "env | grep LAGOON=" | grep cli-drupal
 
 # Should have the correct environment set
-docker-compose exec -T cli bash -c "env" | grep LAGOON_ROUTE | grep drupal9-elastic.docker.amazee.io
+docker-compose exec -T cli bash -c "env" | grep LAGOON_ROUTE | grep drupal9-opensearch.docker.amazee.io
 docker-compose exec -T cli bash -c "env" | grep LAGOON_ENVIRONMENT_TYPE | grep development
 
 # Should be running PHP 8
@@ -70,11 +70,11 @@ docker-compose exec -T cli bash -c "yarn --version"
 # Should have a running Drupal 9 site served by nginx on port 8080
 docker-compose exec -T cli bash -c "curl -kL http://nginx:8080" | grep "Welcome to Drush Site-Install"
 
-# Should have Elasticsearch running
-docker-compose exec -T cli bash -c "curl -kL http://elasticsearch:9200" | grep "docker-cluster"
+# Should have Opensearch running
+docker-compose exec -T cli bash -c "curl -kL http://opensearch:9200" | grep "docker-cluster"
 
-# Should have Elasticsearch cluster healthy
-docker-compose exec -T cli bash -c "curl -kL http://elasticsearch:9200/_cluster/health" | grep "green"
+# Should have Opensearch cluster healthy
+docker-compose exec -T cli bash -c "curl -kL http://opensearch:9200/_cluster/health" | grep "green"
 
 # Should be able to db-export and db-import the database
 docker-compose exec -T cli bash -c "drush sql-dump --result-file /app/test.sql"

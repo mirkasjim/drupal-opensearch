@@ -1,4 +1,4 @@
-name: drupal9-elastic
+name: drupal9-opensearch
 recipe: lagoon
 config:
   flavor: drupal
