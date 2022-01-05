@@ -110,7 +110,6 @@ services:
       - "9200" # exposes the port 9200 with a random local port, find it with `docker-compose port opensearch 9200`
     environment:
       << : *default-environment
-      DISABLE_SECURITY_PLUGIN: "true"
     volumes:
       - search:/usr/share/opensearch/data
 
