@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6097fd9aa57f7d5238c1ac7dd3933307",
+    "content-hash": "a63b75629cd412aea3fceb6796f32d54",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -1906,17 +1906,17 @@
         },
         {
             "name": "drupal/search_api_opensearch",
-            "version": "1.0.0-alpha2",
+            "version": "1.0.0-alpha4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/search_api_opensearch.git",
-                "reference": "1.0.0-alpha2"
+                "reference": "1.0.0-alpha4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api_opensearch-1.0.0-alpha2.zip",
-                "reference": "1.0.0-alpha2",
-                "shasum": "afb0e197eb1f0e326813f2969069b650f6c8745c"
+                "url": "https://ftp.drupal.org/files/projects/search_api_opensearch-1.0.0-alpha4.zip",
+                "reference": "1.0.0-alpha4",
+                "shasum": "2bb8599d1a4b72b7b64d3795c81193d06674cb26"
             },
             "require": {
                 "drupal/core": "^8 || ^9",
@@ -1925,11 +1925,15 @@
                 "opensearch-project/opensearch-php": "^1.0",
                 "php": "^8.0"
             },
+            "require-dev": {
+                "drupal/coder": "^8.3",
+                "drush/drush": "^11.0"
+            },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.0-alpha2",
-                    "datestamp": "1643062148",
+                    "version": "1.0.0-alpha4",
+                    "datestamp": "1645676534",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
