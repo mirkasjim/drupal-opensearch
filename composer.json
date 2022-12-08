@@ -38,7 +38,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config":{
-        "platform": {"php": "8.0.15"},
         "sort-packages": true,
         "allow-plugins": {
             "composer/installers": true,
