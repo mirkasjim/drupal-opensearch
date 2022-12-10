@@ -1,5 +1,5 @@
-Docker Compose Drupal 9 Opensearch - php8, nginx, mariadb, opensearch
-=====================================================================
+Docker Compose Drupal 9 Opensearch option - php8, nginx, mariadb, opensearch
+============================================================================
 
 This is a docker-compose version of the Lando example tests:
 
