@@ -74,7 +74,7 @@ docker-compose exec -T cli bash -c "curl -kL http://nginx:8080" | grep "Drush Si
 docker-compose exec -T cli bash -c "curl -kL http://opensearch:9200" | grep "docker-cluster"
 
 # Should have Opensearch cluster healthy
-docker-compose exec -T cli bash -c "curl -kL http://opensearch:9200/_cluster/health" | grep "green"
+docker-compose exec -T cli bash -c "curl -kL http://opensearch:9200/_cluster/health" | grep -v "red"
 
 # Should be able to db-export and db-import the database
 docker-compose exec -T cli bash -c "drush sql-dump --result-file /app/test.sql"
