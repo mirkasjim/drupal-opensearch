@@ -19,6 +19,7 @@ docker compose build && docker compose up -d
 
 # Ensure mariadb pod is ready to connect
 docker run --rm --net drupal-opensearch_default amazeeio/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
+docker run --rm --net drupal-opensearch_default amazeeio/dockerize dockerize -wait tcp://opensearch:9200 -timeout 1m
 ```
 
 Verification commands
