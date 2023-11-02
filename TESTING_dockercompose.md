@@ -1,4 +1,4 @@
-Docker Compose Drupal 9 Opensearch option - php8, nginx, mariadb, opensearch
+Docker Compose Drupal Opensearch option - php8, nginx, mariadb, opensearch
 ============================================================================
 
 This is a docker-compose version of the Lando example tests:
@@ -14,11 +14,11 @@ sed -i -e "/###/d" docker-compose.yml
 docker network inspect amazeeio-network >/dev/null || docker network create amazeeio-network
 docker-compose down
 
-# Should start up our Lagoon Drupal 9 site successfully
+# Should start up our Lagoon Drupal site successfully
 docker-compose build && docker-compose up -d
 
 # Ensure mariadb pod is ready to connect
-docker run --rm --net drupal9-opensearch_default amazeeio/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
+docker run --rm --net drupal-opensearch_default amazeeio/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
 ```
 
 Verification commands
@@ -33,17 +33,17 @@ docker-compose exec -T cli bash -c "drush cr -y"
 docker-compose exec -T cli bash -c "drush status" | grep "Drupal bootstrap" | grep "Successful"
 
 # Should have all the services we expect
-docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_nginx_1
-docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_mariadb_1
-docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_php_1
-docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_cli_1
-docker ps --filter label=com.docker.compose.project=drupal9-opensearch | grep Up | grep drupal9-opensearch_opensearch_1
+docker ps --filter label=com.docker.compose.project=drupal-opensearch | grep Up | grep drupal-opensearch_nginx_1
+docker ps --filter label=com.docker.compose.project=drupal-opensearch | grep Up | grep drupal-opensearch_mariadb_1
+docker ps --filter label=com.docker.compose.project=drupal-opensearch | grep Up | grep drupal-opensearch_php_1
+docker ps --filter label=com.docker.compose.project=drupal-opensearch | grep Up | grep drupal-opensearch_cli_1
+docker ps --filter label=com.docker.compose.project=drupal-opensearch | grep Up | grep drupal-opensearch_opensearch_1
 
 # Should ssh against the cli container by default
 docker-compose exec -T cli bash -c "env | grep LAGOON=" | grep cli-drupal
 
 # Should have the correct environment set
-docker-compose exec -T cli bash -c "env" | grep LAGOON_ROUTE | grep drupal9-opensearch.docker.amazee.io
+docker-compose exec -T cli bash -c "env" | grep LAGOON_ROUTE | grep drupal-opensearch.docker.amazee.io
 docker-compose exec -T cli bash -c "env" | grep LAGOON_ENVIRONMENT_TYPE | grep development
 
 # Should be running PHP 8
@@ -67,7 +67,7 @@ docker-compose exec -T cli bash -c "node --version"
 # Should have yarn
 docker-compose exec -T cli bash -c "yarn --version"
 
-# Should have a running Drupal 9 site served by nginx on port 8080
+# Should have a running Drupal site served by nginx on port 8080
 docker-compose exec -T cli bash -c "curl -kL http://nginx:8080" | grep "Drush Site-Install"
 
 # Should have Opensearch running
@@ -96,6 +96,6 @@ Destroy tests
 Run the following commands to trash this app like nothing ever happened.
 
 ```bash
-# Should be able to destroy our Drupal 9 site with success
+# Should be able to destroy our Drupal site with success
 docker-compose down --volumes --remove-orphans
 ```

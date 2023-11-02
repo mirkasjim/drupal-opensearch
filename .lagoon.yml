@@ -1,6 +1,6 @@
 docker-compose-yaml: docker-compose.yml
 
-project: drupal9-opensearch
+project: drupal-opensearch
 
 tasks:
 #   pre-rollout:
