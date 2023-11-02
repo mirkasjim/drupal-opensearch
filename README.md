@@ -1,4 +1,4 @@
-# Base template for Drupal projects hosted on Lagoon
+# Base template for Drupal OpenSearch projects hosted on Lagoon
 
 This template includes everything necessary to run on [Lagoon](https://www.github.com/uselagoon/lagoon) (in both the local development environments or on hosted Lagoon clusters.)
 
@@ -12,6 +12,7 @@ This example contains the following services:
 * PHP 8
 * NGINX
 * MariaDB 10.11
+* OpenSearch 2
 
 To see similar projects with additional services, please visit https://github.com/lagoon-examples and to find out more about the services, please visit the documentation at https://docs.lagoon.sh/lagoon
 
@@ -37,8 +38,8 @@ To see similar projects with additional services, please visit https://github.co
 3. Build and start the build images:
 
     ```bash
-    docker-compose up -d
-    docker-compose exec cli composer install
+    docker compose up -d
+    docker compose exec cli composer install
     ```
 
 4. Visit the new site @ `http://drupal-opensearch.docker.amazee.io`
